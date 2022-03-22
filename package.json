@@ -9,6 +9,8 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "axios": "^0.26.1",
+    "miragejs": "^0.1.43",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0"

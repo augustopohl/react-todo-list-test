@@ -24,6 +24,12 @@
     font-family: "Poppins";
   }
   
+  h2 {
+    display: flex;
+    justify-content:center;
+    padding: 2rem;
+  }
+
   .container {
     max-width: 1120px;
     margin: 0 auto;

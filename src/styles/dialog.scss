@@ -15,12 +15,20 @@
         border: 1px solid var(--text-light);
         color: #000;
         width: 60%;
-        height: 60%;
+
+        .buttons-container {
+            display: flex;
+            padding: 2rem;
+            justify-content: space-evenly;
+        }
 
         .cancel {
             background-color: white;
+            padding: 10px 25px 10px 25px;
             color: --text-title;
+            font-size: 15px;
             border: 2px solid var(--red);
+            border-radius: 4px;
             transition-duration: 0.3s;
         }
 
@@ -31,13 +39,16 @@
 
         .accept {
             background-color: white;
+            padding: 10px 30px 10px 30px;
             color: --text-title;
-            border: 2px solid var(--green);
+            font-size: 15px;
+            border: 2px solid var(--blue);
+            border-radius: 4px;
             transition-duration: 0.3s;
         }
         
         .accept:hover {
-            background-color: var(--green);
+            background-color: var(--blue);
             color: white;
           }
     }

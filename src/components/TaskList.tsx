@@ -2,58 +2,47 @@ import { FormEvent, useState, useEffect } from 'react'
 
 import '../styles/tasklist.scss'
 
-import { FiTrash, FiCheckSquare } from 'react-icons/fi'
-import { api } from '../services/api';
+import { FiTrash, FiCheckSquare, FiEdit } from 'react-icons/fi'
+import { useTasks } from '../hooks/useTasks';
+import { DialogWindow } from './DialogWindow';
 interface Task {
   id: number;
   title: string;
   isComplete: boolean;
 }
-interface TaskListProps {
-  onOpenDialog: () => void;
-}
 
-export function TaskList({ onOpenDialog }: TaskListProps) {
-  const [tasks, setTasks] = useState<Task[]>([]);
+export function TaskList() {
+  const { tasks, addNewTask, removeTask, toggleTaskComplete } = useTasks()
   const [newTaskTitle, setNewTaskTitle] = useState('');
-  const [hasBeenConfirmed, setHasBeenConfirmed] = useState(false);
+  const [taskId, setTaskId] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  useEffect(() => {
-    api.get('tasks')
-    .then(response => setTasks(response.data.tasks))
-  }, [])
+  function handleOpenDialog() {
+    setIsDialogOpen(true);
+  }
+
+  function handleCloseDialog() {
+    setIsDialogOpen(false);
+  }
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
 
-    if (newTaskTitle) {
-      const data = {
-        id: new Date().getUTCMilliseconds(),
-        title: newTaskTitle,
-        isComplete: false,
-      };
-      api.post('tasks', data)
-
-      setNewTaskTitle('');
-    } else {
-      console.log('You cannot add an empty task');
-    }
-  }
+    addNewTask(newTaskTitle)
+    setNewTaskTitle('');
+  };
 
   function handleToggleTaskCompletion(id: number) {
-    setTasks(tasks.map(task => task.id === id ? { ...task, isComplete: !task.isComplete } : { ...task }));
+    toggleTaskComplete(id)
   }
 
   function handleRemoveTask(id: number) {
-    setHasBeenConfirmed(false)
-    if (hasBeenConfirmed) {
-      setTasks(tasks.filter(task => task.id !== id));
-    }
+    setTaskId(id)
+    handleOpenDialog()
   }
 
   return (
     <>
-
       <section className="task-list container">
 
         <header>
@@ -66,7 +55,7 @@ export function TaskList({ onOpenDialog }: TaskListProps) {
               onChange={(e) => setNewTaskTitle(e.target.value)}
               value={newTaskTitle}
             />
-            <button type="submit" data-testid="add-task-button" onClick={handleCreateNewTask}>
+            <button type="submit" data-testid="add-task-button">
               <FiCheckSquare size={16} color="#fff" />
             </button>
           </form>
@@ -88,16 +77,30 @@ export function TaskList({ onOpenDialog }: TaskListProps) {
                   </label>
                   <p>{task.title}</p>
                 </div>
+                <div>
+                  <button type="button" data-testid="edit-task-button" >
+                    <FiEdit size={16} />
+                  </button>
 
-                <button type="button" data-testid="remove-task-button" onClick={onOpenDialog}>
-                  <FiTrash size={16} />
-                </button>
+                  <button type="button" data-testid="remove-task-button" onClick={() => handleRemoveTask(task.id)}>
+                    <FiTrash size={16} />
+                  </button>
+                </div>
               </li>
             ))}
-
           </ul>
         </main>
+
       </section>
+      {isDialogOpen ? (
+        <DialogWindow
+          taskId={taskId}
+          onRequestClose={handleCloseDialog}
+        >
+          <h2>Are you sure you want to remove this task?</h2>
+        </DialogWindow>
+      ) : null
+      }
     </>
   )
 }

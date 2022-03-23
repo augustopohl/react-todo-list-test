@@ -17,6 +17,24 @@ section.task-list {
         color: var(--text-title);
         font-size: 2.25rem;
       }
+
+      .return-button {
+        font-weight: 600;
+        border-radius: 8px;
+        border: 0;
+        background: var(--green);
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        padding: 14px;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.95);
+        }
+      }
   
       .input-group {
         display: flex;
@@ -40,7 +58,7 @@ section.task-list {
             color: var(--text-light)
           }
         }
-
+        
         .task-input {
           width: 100%;
           padding: 0 1.5rem;
@@ -56,13 +74,23 @@ section.task-list {
           & + input {
               margin-top: 1rem;
           }
+       }
       }
+    }
   
+    main {
+      margin-top: 3rem;
+
+      div.buttons-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 1rem;
+
         button {
           font-weight: 600;
           border-radius: 8px;
           border: 0;
-          background: var(--green);
+          background: var(--blue);
           color: #fff;
           display: flex;
           flex-direction: row;
@@ -76,10 +104,6 @@ section.task-list {
           }
         }
       }
-    }
-  
-    main {
-      margin-top: 3rem;
   
       ul {
         list-style: none;

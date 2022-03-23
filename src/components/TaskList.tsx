@@ -5,17 +5,16 @@ import '../styles/tasklist.scss'
 import { FiTrash, FiCheckSquare, FiEdit } from 'react-icons/fi'
 import { useTasks } from '../hooks/useTasks';
 import { DialogWindow } from './DialogWindow';
-interface Task {
-  id: number;
-  title: string;
-  isComplete: boolean;
-}
+import { useHistory } from 'react-router-dom';
 
 export function TaskList() {
-  const { tasks, addNewTask, removeTask, toggleTaskComplete } = useTasks()
+  const { tasks, addNewTask, toggleTaskComplete } = useTasks()
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [taskId, setTaskId] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const history = useHistory();
+
 
   function handleOpenDialog() {
     setIsDialogOpen(true);
@@ -32,13 +31,13 @@ export function TaskList() {
     setNewTaskTitle('');
   };
 
-  function handleToggleTaskCompletion(id: number) {
-    toggleTaskComplete(id)
-  }
-
   function handleRemoveTask(id: number) {
     setTaskId(id)
     handleOpenDialog()
+  }
+
+  function handleEditTask() {
+    history.push('/edit')
   }
 
   return (
@@ -66,19 +65,10 @@ export function TaskList() {
             {tasks.map(task => (
               <li key={task.id}>
                 <div className={task.isComplete ? 'completed' : ''} data-testid="task" >
-                  <label className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      readOnly
-                      checked={task.isComplete}
-                      onClick={() => handleToggleTaskCompletion(task.id)}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
                   <p>{task.title}</p>
                 </div>
                 <div>
-                  <button type="button" data-testid="edit-task-button" >
+                  <button type="button" data-testid="edit-task-button" onClick={() => handleEditTask()}>
                     <FiEdit size={16} />
                   </button>
 

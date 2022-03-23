@@ -1,14 +1,16 @@
-import { TaskList } from './components/TaskList'
-import { Header } from "./components/Header";
 import './styles/global.scss'
 import { TasksProvider } from './hooks/useTasks';
+import Routes from './routes';
+import { BrowserRouter } from 'react-router-dom';
+import { Header } from './components/Header';
 
 export function App() {
 
   return (
-    <TasksProvider>
-      <Header />
-      <TaskList />
-    </TasksProvider>
+    <BrowserRouter>
+      <TasksProvider>
+        <Routes />
+      </TasksProvider>
+    </BrowserRouter>
   )
 }

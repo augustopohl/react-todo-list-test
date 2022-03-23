@@ -75,8 +75,9 @@ export function EditTaskList() {
                     />
                     <span className="checkmark"></span>
                   </label>
-                  <label className="task-input">
+                  <label >
                     <input
+                    className="task-input"
                       value={task.title}
                     />
                   </label>

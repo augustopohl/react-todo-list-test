@@ -16,11 +16,11 @@ export interface Change {
   noteId: number;
   taskId?: number;
   type:
-  | "complete"
-  | "create_task"
-  | "remove_task"
-  | "edit_task_name"
-  | "edit_note_name";
+    | "complete"
+    | "create_task"
+    | "remove_task"
+    | "edit_task_name"
+    | "edit_note_name";
   prevValue?: boolean | string;
   newValue?: boolean | string;
 }
@@ -89,12 +89,19 @@ export function useNotes(): NotesData {
 
   console.log(changes);
 
+  /**
+   * On the first render, get the info from the localStorage
+   */
   useEffect(() => {
     const notes = localStorage.getItem("notesInfo");
     if (notes) setNotes(JSON.parse(notes));
   }, []);
 
+  /**
+   * Every time notes changes, we save it to localStorage and sync the editingNotes state
+   */
   useEffect(() => {
+    localStorage.setItem("notesInfo", JSON.stringify(notes));
     if (notes) setEditingNotes(JSON.parse(JSON.stringify(notes)));
   }, [notes]);
 
@@ -156,8 +163,6 @@ export function useNotes(): NotesData {
         break;
     }
     setChanges(newChanges);
-
-    // localStorage.setItem("changesInfo", JSON.stringify(newChanges));
   }
 
   /**
@@ -173,8 +178,6 @@ export function useNotes(): NotesData {
     };
     updatedNotes.push(newNote);
     setNotes(updatedNotes);
-
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
   }
 
   /**
@@ -198,8 +201,6 @@ export function useNotes(): NotesData {
     updatedNotes[productIndex] = newNote;
     setEditingNotes(updatedNotes);
 
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
-
     if (!not_add) {
       const newChange: Change = {
         noteId: id,
@@ -222,8 +223,6 @@ export function useNotes(): NotesData {
     if (productIndex >= 0) {
       updatedNotes.splice(productIndex, 1);
       setNotes(updatedNotes);
-
-      localStorage.setItem('notesInfo', JSON.stringify(updatedNotes))
       _exitEdition();
     }
   }
@@ -247,8 +246,6 @@ export function useNotes(): NotesData {
     note.tasks[taskIndex] = task;
     updatedNotes[noteIndex] = note;
     setEditingNotes(updatedNotes);
-
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
 
     if (!not_add) {
       const newChange: Change = {
@@ -279,8 +276,6 @@ export function useNotes(): NotesData {
     newTasks.push(newTask);
     updatedNotes[productIndex].tasks = newTasks;
     setEditingNotes(updatedNotes);
-
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
 
     if (!not_add) {
       const newChange: Change = {
@@ -313,8 +308,6 @@ export function useNotes(): NotesData {
     updatedNotes[noteIndex] = note;
     setEditingNotes(updatedNotes);
 
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
-
     if (!not_add) {
       const newChange: Change = {
         noteId,
@@ -324,9 +317,6 @@ export function useNotes(): NotesData {
         newValue: task.title,
       };
       setChanges([...changes, newChange]);
-
-      localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
-
     }
   }
 
@@ -346,13 +336,11 @@ export function useNotes(): NotesData {
     updatedNotes[noteIndex] = note;
     setEditingNotes(updatedNotes);
 
-    localStorage.setItem("notesInfo", JSON.stringify(updatedNotes));
-
     if (!not_add) {
       const newChange: Change = {
         noteId,
-        taskId,
         type: "remove_task",
+        taskId,
         prevValue: excluded[0].title,
       };
       setChanges([...changes, newChange]);

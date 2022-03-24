@@ -9,7 +9,7 @@ export interface EditNoteProps {
   id: number;
 }
 export default function EditNote({ id }: EditNoteProps) {
-  const { _saveChanges, _revertChanges, _revertLastChange, editingNotes } = 
+  const { _saveChanges, _revertChanges, _undoLastChange, editingNotes } = 
     useContext(NotesContext);
 
   if (!id) return <Redirect to="/" />;
@@ -35,7 +35,7 @@ export default function EditNote({ id }: EditNoteProps) {
               <button type="button" onClick={_revertChanges}>
                 Revert all changes
               </button>
-              <button type="button" onClick={_revertLastChange}>
+              <button type="button" onClick={_undoLastChange}>
                 Undo last change
               </button>
               <button type="button">Redo last change</button>

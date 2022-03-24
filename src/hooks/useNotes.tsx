@@ -71,7 +71,7 @@ export interface NotesData {
   _toggleTaskComplete: ToggleTaskComplete;
   _saveChanges: () => void;
   _revertChanges: () => void;
-  _revertLastChange: () => void;
+  _undoLastChange: () => void;
 }
 
 export type OpenConfirmation = (
@@ -130,7 +130,7 @@ export function useNotes(): NotesData {
   /**
    * Revert last change of the list
    */
-  function _revertLastChange() {
+  function _undoLastChange() {
     if (changes.length > 0) {
       const newChanges = [...changes];
       const lastChange = newChanges.splice(changes.length - 1, 1)[0];
@@ -350,6 +350,6 @@ export function useNotes(): NotesData {
     _toggleTaskComplete,
     _saveChanges,
     _revertChanges,
-    _revertLastChange,
+    _undoLastChange,
   };
 }

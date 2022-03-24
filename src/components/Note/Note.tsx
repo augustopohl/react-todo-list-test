@@ -12,8 +12,6 @@ export interface NoteProps {
   title: string;
   tasks: Task[];
   editing: boolean;
-  openConfirmation: OpenConfirmation,
-  clickEdit: (id: number) => void;
 }
 const Note = ({ id, index, title, tasks, editing }: NoteProps) => {
   const { _addNewTask, clickEdit, openConfirmation } = useContext(NotesContext);

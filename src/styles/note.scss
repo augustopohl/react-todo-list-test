@@ -1,0 +1,60 @@
+.note-container {
+  padding: 0;
+  margin-bottom: 24px;
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.75rem;
+  box-shadow: 1px 1px 4px rgb(100, 100, 100);
+
+  .title-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    .title {
+      padding: 1.5rem;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    button {
+      margin-right: 10px;
+      background: transparent;
+      border: 0;
+
+      svg {
+        color: var(--red);
+      }
+
+      &:hover {
+        svg {
+          filter: brightness(0.5);
+        }
+      }
+    }
+  }
+
+  .tasks-container {
+    padding: 1rem;
+
+    button.add-task {
+      font-weight: 600;
+      border-radius: 8px;
+      border: 0;
+      margin: 14px 10px;
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      padding: 14px;
+      transition: filter 0.2s;
+
+      &:hover {
+        filter: brightness(0.95);
+      }
+    }
+  }
+}

@@ -16,11 +16,11 @@ export interface Change {
   noteId: number;
   taskId?: number;
   type:
-    | "complete"
-    | "create_task"
-    | "remove_task"
-    | "edit_task_name"
-    | "edit_note_name";
+  | "complete"
+  | "create_task"
+  | "remove_task"
+  | "edit_task_name"
+  | "edit_note_name";
   prevValue?: boolean | string;
   newValue?: boolean | string;
 }
@@ -87,8 +87,6 @@ export function useNotes(): NotesData {
   const [editingNotes, setEditingNotes] = useState<Note[]>([]); // State to store changed notes
   const [changes, setChanges] = useState<Change[]>([]); // State to store changes
 
-  console.log(changes);
-
   /**
    * On the first render, get the info from the localStorage
    */
@@ -104,11 +102,6 @@ export function useNotes(): NotesData {
     localStorage.setItem("notesInfo", JSON.stringify(notes));
     if (notes) setEditingNotes(JSON.parse(JSON.stringify(notes)));
   }, [notes]);
-
-  // useEffect(() => {
-  //   const changes = localStorage.getItem("changesInfo");
-  //   if (changes) setChanges(JSON.parse(changes));
-  // }, []);
 
   /**
    *  Handle redirect to home page
@@ -142,8 +135,6 @@ export function useNotes(): NotesData {
     const newChanges = [...changes];
     const lastChange = newChanges.splice(changes.length - 1, 1)[0];
     const { noteId, taskId, type, prevValue, newValue } = lastChange;
-
-    console.log(lastChange);
 
     switch (type) {
       case "complete":
@@ -327,7 +318,6 @@ export function useNotes(): NotesData {
    * @param not_add If should NOT add this change to the list of changes
    */
   function _removeTask(noteId: number, taskId: number, not_add?: boolean) {
-    console.log("removingTask");
     const updatedNotes = [...editingNotes];
     const noteIndex = updatedNotes.findIndex((note) => note.id === noteId);
     const note = { ...updatedNotes[noteIndex] };

@@ -7,50 +7,38 @@
 
 <br>
 
-# Desafio / Challenge
-Criar uma aplicação React onde o usuário é autenticado pela API do Github e é redirecionado para um painel onde possa pesquisar por usuários do Github e consultar seus repositórios e os repositórios mais frequentados por eles.
+# Test Assignment for Front-end Developer
 
-Create a React application where the user is authenticated by the Github API and redirected to a dashboard in which is possible to search for Github users and visualize their repositories and starred repos.
+The candidate should create a simple SPA app for making notes and to do tasks using React.
 
 <br>
 
-## 🧪 Tecnologias / Techs
+## 🧪 Technologies
 
-Esse projeto foi desenvolvido com as seguintes tecnologias:
-
-This project was developed with the following technologies:
+This project has been developed with the following technologies:
 
 - [React](https://reactjs.org)
-- [Firebase](https://firebase.google.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Styled-components](https://styled-components.com/)
+- [Sass](https://sass-lang.com/)
 
-## 🚀 Como executar / How to run
-
-Clone o projeto e acesse a pasta do mesmo.
+## 🚀 How to run
 
 Clone the project and access its folder.
 
 ```bash
-$ git clone https://github.com/augustopohl/desafiocompassouol.git
-$ cd desafiocompassouol
+$ git clone https://github.com/augustopohl/react-todo-list-test.git
+$ cd react-todo-list-test
 ```
-
-Para iniciá-lo, siga os passos abaixo:
 
 To start it, follow these steps:
 
 ```bash
-# Instalar as dependências
 # Install dependencies
 $ yarn
 
-# Iniciar o projeto
 # Start project
-$ yarn start
+$ yarn dev
 ```
 
-O app estará disponível no seu browser pelo endereço http://localhost:3000.
-
-The app is availabre on your browser via http://localhost:3000.
+The app is available on your browser on http://localhost:8080.
 

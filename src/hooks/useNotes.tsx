@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
 export interface Task {
   id: number;
   title: string;
@@ -83,9 +82,9 @@ export type OpenConfirmation = (
 
 export function useNotes(): NotesData {
   const history = useHistory();
-  const [notes, setNotes] = useState<Note[]>([]); // State to store notes
-  const [editingNotes, setEditingNotes] = useState<Note[]>([]); // State to store changed notes
-  const [changes, setChanges] = useState<Change[]>([]); // State to store changes
+  const [notes, setNotes] = useState<Note[]>([]); 
+  const [editingNotes, setEditingNotes] = useState<Note[]>([]); 
+  const [changes, setChanges] = useState<Change[]>([]);
 
   /**
    * On the first render, get the info from the localStorage
@@ -136,7 +135,7 @@ export function useNotes(): NotesData {
       const newChanges = [...changes];
       const lastChange = newChanges.splice(changes.length - 1, 1)[0];
       const { noteId, taskId, type, prevValue, newValue } = lastChange;
-  
+
       switch (type) {
         case "complete":
           if (taskId) _toggleTaskComplete(noteId, taskId, true);
@@ -253,7 +252,6 @@ export function useNotes(): NotesData {
   }
 
   /**
-   *
    * @param noteId Note id
    * @param title New task title
    */
@@ -279,8 +277,8 @@ export function useNotes(): NotesData {
       setChanges([...changes, newChange]);
     }
   }
+
   /**
-   *
    * @param noteId Note id
    * @param taskId Task id
    */
@@ -314,11 +312,11 @@ export function useNotes(): NotesData {
   }
 
   /**
-   *
    * @param noteId Note id
    * @param taskId Task id
    * @param not_add If should NOT add this change to the list of changes
    */
+  
   function _removeTask(noteId: number, taskId: number, not_add?: boolean) {
     const updatedNotes = [...editingNotes];
     const noteIndex = updatedNotes.findIndex((note) => note.id === noteId);

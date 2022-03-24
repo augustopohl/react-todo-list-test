@@ -9,7 +9,7 @@
 
 # Test Assignment for Front-end Developer
 
-The candidate should create a simple SPA app for making notes and to do tasks using React.
+For this test, the candidate should create a simple SPA app for making notes and toDo tasks using React.
 
 <br>
 

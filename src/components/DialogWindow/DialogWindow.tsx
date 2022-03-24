@@ -13,7 +13,11 @@ export function DialogWindow() {
   return deletion.open ? (
     <div className="dialog" onClick={exitConfirmation}>
       <div className="container">
-        <div className="content">{children}</div>
+        <div className="content">
+          <h2>
+            {children}
+          </h2>
+        </div>
         <div className="buttons-container">
           <button className="accept" onClick={confirm}>
             Yes

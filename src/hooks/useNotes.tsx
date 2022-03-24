@@ -132,28 +132,30 @@ export function useNotes(): NotesData {
    * Revert last change of the list
    */
   function _revertLastChange() {
-    const newChanges = [...changes];
-    const lastChange = newChanges.splice(changes.length - 1, 1)[0];
-    const { noteId, taskId, type, prevValue, newValue } = lastChange;
-
-    switch (type) {
-      case "complete":
-        if (taskId) _toggleTaskComplete(noteId, taskId, true);
-        break;
-      case "create_task":
-        if (taskId) _removeTask(noteId, taskId, true);
-        break;
-      case "remove_task":
-        if (taskId) _addNewTask(noteId, prevValue as string, true);
-        break;
-      case "edit_task_name":
-        if (taskId) _editTaskTitle(noteId, taskId, prevValue as string, true);
-        break;
-      case "edit_note_name":
-        if (noteId) _editNoteTitle(noteId, newValue as string, true);
-        break;
+    if (changes.length > 0) {
+      const newChanges = [...changes];
+      const lastChange = newChanges.splice(changes.length - 1, 1)[0];
+      const { noteId, taskId, type, prevValue, newValue } = lastChange;
+  
+      switch (type) {
+        case "complete":
+          if (taskId) _toggleTaskComplete(noteId, taskId, true);
+          break;
+        case "create_task":
+          if (taskId) _removeTask(noteId, taskId, true);
+          break;
+        case "remove_task":
+          if (taskId) _addNewTask(noteId, prevValue as string, true);
+          break;
+        case "edit_task_name":
+          if (taskId) _editTaskTitle(noteId, taskId, prevValue as string, true);
+          break;
+        case "edit_note_name":
+          if (noteId) _editNoteTitle(noteId, newValue as string, true);
+          break;
+      }
+      setChanges(newChanges);
     }
-    setChanges(newChanges);
   }
 
   /**

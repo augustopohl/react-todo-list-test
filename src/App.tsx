@@ -1,16 +1,18 @@
-import './styles/global.scss'
-import { TasksProvider } from './hooks/useTasks';
-import Routes from './routes';
-import { BrowserRouter } from 'react-router-dom';
-import { Header } from './components/Header';
+import "./styles/global.scss";
+import Routes from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import { DialogWindow } from "./components/DialogWindow/DialogWindow";
+import AppContextProvider from "./components/AppContextProvider/AppContextProvider";
 
 export function App() {
-
   return (
     <BrowserRouter>
-      <TasksProvider>
-        <Routes />
-      </TasksProvider>
+      <AppContextProvider>
+        <>
+          <Routes />
+          <DialogWindow />
+        </>
+      </AppContextProvider>
     </BrowserRouter>
-  )
+  );
 }

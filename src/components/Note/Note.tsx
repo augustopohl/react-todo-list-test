@@ -18,7 +18,6 @@ export interface NoteProps {
 const Note = ({ id, index, title, tasks, editing }: NoteProps) => {
   const { _addNewTask, clickEdit, openConfirmation } = useContext(NotesContext);
 
-  console.log(id, 'CLICKEDIT')
   return (
     <div className="note-container">
       <div className="title-container">

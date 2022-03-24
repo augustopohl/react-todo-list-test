@@ -1,11 +1,21 @@
-import { Header } from "../../components/Header";
-import { TaskList } from "../../components/TaskList";
+import { useContext } from "react";
+import { NotesContext } from "../../components/AppContextProvider/AppContextProvider";
+import { Header } from "../../components/Header/Header";
+import NotesList from "../../components/NotesList/NotesList";
 
 export default function Home() {
+  const { notes, addNewNote, clickEdit, openConfirmation } =
+    useContext(NotesContext);
+
   return (
     <>
       <Header />
-      <TaskList />
+      <NotesList
+        addNewNote={addNewNote}
+        notes={notes}
+        openConfirmation={openConfirmation}
+        clickEdit={clickEdit}
+      />
     </>
-  )
+  );
 }

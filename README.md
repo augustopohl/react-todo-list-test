@@ -1,6 +1,6 @@
 <h1 align="center">
     <br>
-    <img src="/logo.svg" width="350" heigh="100" alt="logo compasso uol">
+    <img src="/public/logo.svg" width="350" heigh="100" alt="to do logo">
 </h1>
 
 <br>

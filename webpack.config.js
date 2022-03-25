@@ -24,7 +24,7 @@ module.exports = {
   plugins: [
     isDevelopment && new ReactRefreshWebpackPlugin(),  
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html')
+      template: path.resolve(__dirname, 'public', 'index.html'),
     })
   ].filter(Boolean),
   module: {
@@ -40,6 +40,14 @@ module.exports = {
             ].filter(Boolean)
           }
         }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
       },
       {
         test: /\.scss$/,
